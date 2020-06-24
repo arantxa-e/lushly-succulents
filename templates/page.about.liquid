@@ -1,0 +1,15 @@
+<div class="section-header text-center custom-header">
+  <h1>{{ page.title }}</h1>
+</div>
+<div class="grid">
+  <div class="grid__item medium-up--five-sixths medium-up--push-one-twelfth">
+    <div class="rte page-width" data-aos="fade-up">
+      {% section 'team' %}
+      <div class="page-about-content">
+        {{ page.content }}
+      </div>
+      {% section 'contact' %}
+    </div>
+  </div>
+</div>
+

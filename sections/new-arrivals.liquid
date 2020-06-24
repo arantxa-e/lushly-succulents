@@ -1,0 +1,42 @@
+<div class="page-width" data-aos="zoom-in">
+    <div class="section-header text-center">
+        <h2 class="h3">New Arrivals</h2>
+    </div>
+    {% if collections.new-arrivals.products.size > 0 %}
+        <div class="grid">
+            {% for product in collections.new-arrivals.products limit:3 %}
+            <a href="{{ product.url }}">
+                <div class="grid__item medium-up--one-third">
+                    <div class="new-arrival-inner">
+                        <div class="grid">
+                            <div class="grid__item one-half">
+                                <img src="{{ product.featured_image | product_img_url: 'medium' }}" alt="{{ product.title | escape  }}" class="round-img" /> 
+                            </div>
+                            <div class="grid__item one-half">
+                                <strong>{{ product.title | escape  }}</strong>
+                                <p>{{ product.description  | strip_html | truncate: 60 }}</p>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </a>
+            {% endfor %}    
+        </div>
+    {% endif %}
+    <div class="text-center new-arrival-btn-wrapper">
+        <a href="" class="btn">View All Products</a>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "New Arrival",
+    "class": "index-section",
+    "presets": [
+        {
+            "name": "New Arrival",
+            "category": "Custom Sections"
+        }
+    ]
+}
+{% endschema %}

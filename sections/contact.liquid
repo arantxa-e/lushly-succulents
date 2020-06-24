@@ -1,0 +1,91 @@
+{% case section.blocks.size %}
+  {% when 1 %}
+    {%- assign grid_item_width = 'medium-up--one-half' -%}
+  {% when 2 %}
+    {%- assign grid_item_width = 'medium-up--one-half' -%}
+  {% when 3 %}
+    {%- assign grid_item_width = 'medium-up--one-third' -%}
+  {% when 4 %}
+    {%- assign grid_item_width = 'medium-up--one-quarter' -%}
+{% endcase %}
+
+<div class="grid">
+    {% for block in section.blocks %}
+    <div class="grid__item {{ grid_item_width }}">
+        <div class="contact-inner text-center">
+            <div class="contact-icon">
+                <i class="material-icons">{{ block.settings.icon }}</i>
+            </div>
+            <h3>{{ block.settings.title }}</h3>
+            <p> {{ block.settings.content }}</p>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+
+{% schema %}
+{
+    "name": "Contact Details",
+    "max_blocks": 4,
+    "class": "page-width contact-section secondary",
+    "blocks": [
+        {
+            "type": "select",
+            "name": "Contact Info",
+            "settings": [
+                {
+                    "type": "select",
+                    "id": "icon",
+                    "label": "Icon", 
+                    "default": "store_mall_directory",
+                    "options": [
+                        {
+                            "value": "store_mall_directory", 
+                            "label": "Storefront"
+                        },
+                        {
+                            "value": "call", 
+                            "label": "Phone"
+                        },
+                        {
+                            "value": "phonelink_ring", 
+                            "label": "Smartphone"
+                        },
+                        {
+                            "value": "location_on", 
+                            "label": "Location Pin"
+                        },
+                        {
+                            "value": "mail", 
+                            "label": "Mail"
+                        },
+                        {
+                            "value": "face", 
+                            "label": "Face"
+                        }
+                    ]
+                },
+                {
+                    "type": "text", 
+                    "id": "title",
+                    "label": "Contact Title", 
+                    "default": "Address, phone number, etc."
+                },
+                {
+                    "type": "richtext",
+                    "id": "content",
+                    "label": "Content", 
+                    "default": "<p>(555) 555 - 5555</p>"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Contact Details",
+            "category": "Custom Sections"
+        }
+    ]
+}
+{% endschema %}

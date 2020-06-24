@@ -1,0 +1,67 @@
+{% case section.blocks.size %}
+  {% when 1 %}
+    {%- assign grid_item_width = 'medium-up--one-half' -%}
+  {% when 2 %}
+    {%- assign grid_item_width = 'medium-up--one-half' -%}
+  {% when 3 %}
+    {%- assign grid_item_width = 'medium-up--one-third' -%}
+  {% when 4 %}
+    {%- assign grid_item_width = 'medium-up--one-quarter' -%}
+{% endcase %}
+
+<h2 class="h3 text-center">{{ section.settings.heading_text }}</h2>
+<div class="grid" data-aos="fade-up">
+    {% for block in section.blocks %}
+    <div class="grid__item {{ grid_item_width }} text-center" style="margin-bottom: 55px;">
+        <div class="team-card">
+            <div class="team-card__photo">
+                {{ block.settings.photo | img_url: '500x500' | img_tag }}
+            </div>
+            <div class="team-card__name">
+                {{ block.settings.name }}{% if block.settings.role %} &mdash; <strong>{{ block.settings.role }}</strong>{% endif%}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+    "name": "Team Members",
+    "max_blocks": 4,
+    "class": "team-section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading_text",
+            "label": "Heading Text",
+            "default": "Meet Our Team"
+        }
+    ], 
+    "blocks": [
+        {
+            "type": "select",
+            "name": "Team Member",
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "name",
+                    "label": "Team Member Name",
+                    "default": "John Smith"
+                },
+                {
+                    "type": "text",
+                    "id": "role",
+                    "label": "Team Member Role",
+                    "default": "Associate"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "photo",
+                    "label": "Team Member Photo"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}
